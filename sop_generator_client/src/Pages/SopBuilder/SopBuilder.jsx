@@ -36,6 +36,10 @@ const SopBuilder = () => {
     // Log the form data
     console.log("Form Data:", formData);
     // Add any additional logic or API calls for form submission here
+    document.getElementById("my_modal_5").close();
+  };
+  const handleBookNowClick = () => {
+    document.getElementById("my_modal_5").showModal();
   };
   return (
     <div className="min-h-screen hero font-noto-sans">
@@ -333,9 +337,47 @@ const SopBuilder = () => {
             />
           </div>
           <div className="mt-6 form-control">
-            <button className="btn bg-[#7A5CFA] text-[16px] font-normal normal-case text-white hover:bg-[#917bf2]">
+            <button
+              type="button"
+              className="btn bg-[#7A5CFA] text-[16px] font-normal normal-case text-white hover:bg-[#917bf2]"
+              onClick={handleBookNowClick}
+            >
               Submit
             </button>
+            <dialog
+              id="my_modal_5"
+              className="modal modal-bottom sm:modal-middle"
+            >
+              <div className="modal-box">
+                <h3 className="text-lg font-bold">
+                  Want to confirm your submission?
+                </h3>
+                <p className="py-4">
+                  Press <strong>Confirm</strong> To submit, Press{" "}
+                  <strong>Close</strong> To cancel
+                </p>
+                <div className="modal-action">
+                  <div className="flex items-center justify-center gap-4">
+                    <button
+                      type="button"
+                      onClick={() =>
+                        document.getElementById("my_modal_5").close()
+                      }
+                      className="px-4 py-2 text-white bg-red-500 rounded-md hover:bg-red-400"
+                    >
+                      Close
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleSubmit}
+                      className="px-4 py-2 text-white bg-green-500 rounded-md hover:bg-green-400"
+                    >
+                      Confirm
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </dialog>
           </div>
         </form>
       </div>
