@@ -4,25 +4,25 @@ import axios from "axios";
 const SopBuilder = () => {
   // State variables for form fields
   const [formData, setFormData] = useState({
+    fullName: "",
     email: "",
-    name: "",
     age: "",
-    education: "",
+    educationLevel: "",
     institute: "",
-    study: "",
-    experience: "",
-    "institute-canada": "",
-    "programme-canada": "",
-    country: "",
-    goals: "",
-    "listening-score": "",
-    "reading-score": "",
-    "speaking-score": "",
-    "writing-score": "",
-    "tuition-first": "",
-    "tuition-fee": "",
-    gic: "",
-    "gic-fee": "",
+    fieldOfStudy: "",
+    workExperience: "",
+    admittedInCanada: "",
+    programOfStudyInCanada: "",
+    applyingFromCountry: "",
+    futureGoals: "",
+    englishScoresListening: "",
+    englishScoresReading: "",
+    englishScoresSpeaking: "",
+    englishScoresWriting: "",
+    paidFirstYearTuition: "",
+    tuitionFeePaid: "",
+    didGIC: "",
+    gicAmountPaid: "",
   });
 
   // Handle form field changes
@@ -36,7 +36,7 @@ const SopBuilder = () => {
     e.preventDefault();
 
     axios
-      .post("http://localhost:3000/sendEmail", formData)
+      .post("http://localhost:3000/sendSOP", formData)
       .then((res) => console.log(res.data))
       .catch((error) => console.log(error));
 
@@ -77,7 +77,7 @@ const SopBuilder = () => {
             </label>
             <input
               onBlur={handleInputChange}
-              name="name"
+              name="fullName"
               type="text"
               placeholder="Enter name"
               className="input input-bordered"
@@ -100,7 +100,7 @@ const SopBuilder = () => {
           <div className="form-control">
             <select
               onBlur={handleInputChange}
-              name="education"
+              name="educationLevel"
               className="w-full max-w-xl select select-bordered"
             >
               <option className="font-bold" disabled selected>
@@ -134,7 +134,7 @@ const SopBuilder = () => {
             </label>
             <input
               onBlur={handleInputChange}
-              name="study"
+              name="fieldOfStudy"
               type="text"
               placeholder="Enter field of study"
               className="input input-bordered"
@@ -169,7 +169,7 @@ const SopBuilder = () => {
             </div>
             <textarea
               onBlur={handleInputChange}
-              name="experience"
+              name="workExperience"
               placeholder="Enter work experience"
               className="w-full max-w-xl textarea textarea-bordered textarea-lg"
             ></textarea>
@@ -182,7 +182,7 @@ const SopBuilder = () => {
             </label>
             <input
               onBlur={handleInputChange}
-              name="institute-canada"
+              name="admittedInCanada"
               type="text"
               placeholder="Enter institute in Canada"
               className="input input-bordered"
@@ -197,7 +197,7 @@ const SopBuilder = () => {
             </label>
             <input
               onBlur={handleInputChange}
-              name="programme-canada"
+              name="programOfStudyInCanada"
               type="text"
               placeholder="Enter programme in Canada"
               className="input input-bordered"
@@ -212,7 +212,7 @@ const SopBuilder = () => {
             </label>
             <input
               onBlur={handleInputChange}
-              name="country"
+              name="applyingFromCountry"
               type="text"
               placeholder="Enter country"
               className="input input-bordered"
@@ -225,7 +225,7 @@ const SopBuilder = () => {
             </label>
             <input
               onBlur={handleInputChange}
-              name="goals"
+              name="futureGoals"
               type="text"
               placeholder="Enter goals"
               className="input input-bordered"
@@ -238,7 +238,7 @@ const SopBuilder = () => {
             </label>
             <input
               onBlur={handleInputChange}
-              name="listening-score"
+              name="englishScoresListening"
               type="number"
               placeholder="Enter listening score"
               className="input input-bordered"
@@ -251,7 +251,7 @@ const SopBuilder = () => {
             </label>
             <input
               onBlur={handleInputChange}
-              name="reading-score"
+              name="englishScoresReading"
               type="number"
               placeholder="Enter reading score"
               className="input input-bordered"
@@ -264,7 +264,7 @@ const SopBuilder = () => {
             </label>
             <input
               onBlur={handleInputChange}
-              name="speaking-score"
+              name="englishScoresSpeaking"
               type="number"
               placeholder="Enter speaking score"
               className="input input-bordered"
@@ -277,7 +277,7 @@ const SopBuilder = () => {
             </label>
             <input
               onBlur={handleInputChange}
-              name="writing-score"
+              name="englishScoresWriting"
               type="number"
               placeholder="Enter writing score"
               className="input input-bordered"
@@ -287,7 +287,7 @@ const SopBuilder = () => {
           <div className="form-control">
             <select
               onBlur={handleInputChange}
-              name="tuition-first"
+              name="paidFirstYearTuition"
               className="w-full max-w-xl select select-bordered"
             >
               <option className="font-bold" disabled selected>
@@ -305,7 +305,7 @@ const SopBuilder = () => {
             </label>
             <input
               onBlur={handleInputChange}
-              name="tuition-fee"
+              name="tuitionFeePaid"
               type="text"
               placeholder="Enter tuition fee"
               className="input input-bordered"
@@ -315,7 +315,7 @@ const SopBuilder = () => {
           <div className="form-control">
             <select
               onBlur={handleInputChange}
-              name="gic"
+              name="didGIC"
               className="w-full max-w-xl select select-bordered"
             >
               <option className="font-bold" disabled selected>
@@ -333,7 +333,7 @@ const SopBuilder = () => {
             </label>
             <input
               onBlur={handleInputChange}
-              name="gic-fee"
+              name="gicAmountPaid"
               type="text"
               placeholder="Enter GIC fee"
               className="input input-bordered"
