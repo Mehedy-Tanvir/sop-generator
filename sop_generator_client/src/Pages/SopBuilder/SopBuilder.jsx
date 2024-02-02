@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 
 const SopBuilder = () => {
   // State variables for form fields
@@ -33,9 +34,12 @@ const SopBuilder = () => {
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Log the form data
-    console.log("Form Data:", formData);
-    // Add any additional logic or API calls for form submission here
+
+    axios
+      .post("http://localhost:3000/sendEmail", formData)
+      .then((res) => console.log(res.data))
+      .catch((error) => console.log(error));
+
     document.getElementById("my_modal_5").close();
   };
   const handleBookNowClick = () => {
