@@ -1,4 +1,42 @@
+import { useState } from "react";
+
 const SopBuilder = () => {
+  // State variables for form fields
+  const [formData, setFormData] = useState({
+    email: "",
+    name: "",
+    age: "",
+    education: "",
+    institute: "",
+    study: "",
+    experience: "",
+    "institute-canada": "",
+    "programme-canada": "",
+    country: "",
+    goals: "",
+    "listening-score": "",
+    "reading-score": "",
+    "speaking-score": "",
+    "writing-score": "",
+    "tuition-first": "",
+    "tuition-fee": "",
+    gic: "",
+    "gic-fee": "",
+  });
+
+  // Handle form field changes
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  // Handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Log the form data
+    console.log("Form Data:", formData);
+    // Add any additional logic or API calls for form submission here
+  };
   return (
     <div className="min-h-screen hero font-noto-sans">
       <div className="w-full mb-10 md:mt-10 md:max-w-xl card md:shadow-2xl">
@@ -11,12 +49,13 @@ const SopBuilder = () => {
             as per your needs.
           </p>
         </div>
-        <form className="card-body">
+        <form className="card-body" onSubmit={handleSubmit}>
           <div className="form-control">
             <label className="label">
               <span className="font-bold label-text">Email</span>
             </label>
             <input
+              onBlur={handleInputChange}
               name="email"
               type="email"
               placeholder="Enter email"
@@ -29,6 +68,7 @@ const SopBuilder = () => {
               <span className="font-bold label-text">Full Name</span>
             </label>
             <input
+              onBlur={handleInputChange}
               name="name"
               type="text"
               placeholder="Enter name"
@@ -41,6 +81,7 @@ const SopBuilder = () => {
               <span className="label-text">Age</span>
             </label>
             <input
+              onBlur={handleInputChange}
               name="age"
               type="number"
               placeholder="Enter age"
@@ -50,6 +91,7 @@ const SopBuilder = () => {
           </div>
           <div className="form-control">
             <select
+              onBlur={handleInputChange}
               name="education"
               className="w-full max-w-xl select select-bordered"
             >
@@ -70,6 +112,7 @@ const SopBuilder = () => {
               </span>
             </label>
             <input
+              onBlur={handleInputChange}
               name="institute"
               type="text"
               placeholder="Enter institute"
@@ -82,6 +125,7 @@ const SopBuilder = () => {
               <span className="label-text">What did you study</span>
             </label>
             <input
+              onBlur={handleInputChange}
               name="study"
               type="text"
               placeholder="Enter field of study"
@@ -116,6 +160,7 @@ const SopBuilder = () => {
               </p>
             </div>
             <textarea
+              onBlur={handleInputChange}
               name="experience"
               placeholder="Enter work experience"
               className="w-full max-w-xl textarea textarea-bordered textarea-lg"
@@ -128,6 +173,7 @@ const SopBuilder = () => {
               </span>
             </label>
             <input
+              onBlur={handleInputChange}
               name="institute-canada"
               type="text"
               placeholder="Enter institute in Canada"
@@ -142,6 +188,7 @@ const SopBuilder = () => {
               </span>
             </label>
             <input
+              onBlur={handleInputChange}
               name="programme-canada"
               type="text"
               placeholder="Enter programme in Canada"
@@ -156,6 +203,7 @@ const SopBuilder = () => {
               </span>
             </label>
             <input
+              onBlur={handleInputChange}
               name="country"
               type="text"
               placeholder="Enter country"
@@ -168,6 +216,7 @@ const SopBuilder = () => {
               <span className="label-text">What are your future goals?</span>
             </label>
             <input
+              onBlur={handleInputChange}
               name="goals"
               type="text"
               placeholder="Enter goals"
@@ -180,6 +229,7 @@ const SopBuilder = () => {
               <span className="label-text">English Scores - Listening</span>
             </label>
             <input
+              onBlur={handleInputChange}
               name="listening-score"
               type="number"
               placeholder="Enter listening score"
@@ -192,6 +242,7 @@ const SopBuilder = () => {
               <span className="label-text">English Scores - Reading</span>
             </label>
             <input
+              onBlur={handleInputChange}
               name="reading-score"
               type="number"
               placeholder="Enter reading score"
@@ -204,6 +255,7 @@ const SopBuilder = () => {
               <span className="label-text">English Scores - Speaking</span>
             </label>
             <input
+              onBlur={handleInputChange}
               name="speaking-score"
               type="number"
               placeholder="Enter speaking score"
@@ -216,6 +268,7 @@ const SopBuilder = () => {
               <span className="label-text">English Scores - Writing</span>
             </label>
             <input
+              onBlur={handleInputChange}
               name="writing-score"
               type="number"
               placeholder="Enter writing score"
@@ -225,6 +278,7 @@ const SopBuilder = () => {
           </div>
           <div className="form-control">
             <select
+              onBlur={handleInputChange}
               name="tuition-first"
               className="w-full max-w-xl select select-bordered"
             >
@@ -242,6 +296,7 @@ const SopBuilder = () => {
               </span>
             </label>
             <input
+              onBlur={handleInputChange}
               name="tuition-fee"
               type="text"
               placeholder="Enter tuition fee"
@@ -251,6 +306,7 @@ const SopBuilder = () => {
           </div>
           <div className="form-control">
             <select
+              onBlur={handleInputChange}
               name="gic"
               className="w-full max-w-xl select select-bordered"
             >
@@ -268,6 +324,7 @@ const SopBuilder = () => {
               </span>
             </label>
             <input
+              onBlur={handleInputChange}
               name="gic-fee"
               type="text"
               placeholder="Enter GIC fee"
