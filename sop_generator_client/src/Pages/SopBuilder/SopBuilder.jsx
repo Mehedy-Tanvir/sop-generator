@@ -1,7 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const SopBuilder = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   // State variables for form fields
   const [formData, setFormData] = useState({
     fullName: "",
@@ -34,13 +36,23 @@ const SopBuilder = () => {
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    const toastId = toast.loading("Submitting form...");
 
     axios
       .post("http://localhost:3000/sendSOP", formData)
-      .then((res) => console.log(res.data))
-      .catch((error) => console.log(error));
-
-    document.getElementById("my_modal_5").close();
+      .then((res) => {
+        toast.success("SOP was sent to your email!", { id: toastId });
+        console.log(res.data);
+      })
+      .catch((error) => {
+        toast.error("SOP was not sent to your email!", { id: toastId });
+        console.log(error);
+      })
+      .finally(() => {
+        setIsSubmitting(false); // Set isSubmitting back to false after the request is complete
+        document.getElementById("my_modal_5").close();
+      });
   };
   const handleBookNowClick = () => {
     document.getElementById("my_modal_5").showModal();
@@ -373,6 +385,7 @@ const SopBuilder = () => {
                     </button>
                     <button
                       type="button"
+                      disabled={isSubmitting}
                       onClick={handleSubmit}
                       className="px-4 py-2 text-white bg-green-500 rounded-md hover:bg-green-400"
                     >

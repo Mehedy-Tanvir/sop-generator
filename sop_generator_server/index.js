@@ -3,12 +3,11 @@ const app = express();
 const cors = require("cors");
 require("dotenv").config();
 const { OpenAI } = require("openai");
+// const openai = new OpenAI();
 const openai = new OpenAI({
   apiKey: process.env.OPEN_AI_KEY,
 });
 const nodemailer = require("nodemailer");
-
-// const openai = new OpenAI();
 
 const port = process.env.PORT || 3000;
 
@@ -85,29 +84,29 @@ async function run() {
       `;
 
         // Generate personalized SOP using OpenAI GPT-3
-        const generatedSOP = false;
+        // const generatedSOP = false;
         // as I don't have premium plan I could not generate sop through openai
-        // const generatedSOP = await generateSOP({
-        //   fullName,
-        //   email,
-        //   age,
-        //   educationLevel,
-        //   institute,
-        //   fieldOfStudy,
-        //   workExperience,
-        //   admittedInCanada,
-        //   programOfStudyInCanada,
-        //   applyingFromCountry,
-        //   futureGoals,
-        //   englishScoresListening,
-        //   englishScoresReading,
-        //   englishScoresSpeaking,
-        //   englishScoresWriting,
-        //   paidFirstYearTuition,
-        //   tuitionFeePaid,
-        //   didGIC,
-        //   gicAmountPaid,
-        // });
+        const generatedSOP = await generateSOP({
+          fullName,
+          email,
+          age,
+          educationLevel,
+          institute,
+          fieldOfStudy,
+          workExperience,
+          admittedInCanada,
+          programOfStudyInCanada,
+          applyingFromCountry,
+          futureGoals,
+          englishScoresListening,
+          englishScoresReading,
+          englishScoresSpeaking,
+          englishScoresWriting,
+          paidFirstYearTuition,
+          tuitionFeePaid,
+          didGIC,
+          gicAmountPaid,
+        });
         if (generatedSOP) {
           // Send email with the generated SOP
           const emailTemplate = `
@@ -117,6 +116,17 @@ async function run() {
      <p>Best regards,</p>
      <p>Customized SOP Generator</p>
    `;
+
+          const mailOptions = {
+            from: {
+              name: "Customized SOP Generator",
+              address: process.env.NODE_MAILER_USER,
+            }, // sender address
+            to: `${email}`, // list of receivers
+            subject: "Your Personalized Statement of Purpose", // Subject line
+            html: `${emailTemplate}`, // html body
+          };
+          const info = await transporter.sendMail(mailOptions);
         } else {
           // Send email with the generated SOP
           const emailTemplate = `
@@ -169,6 +179,7 @@ async function run() {
     }) {
       // Construct a prompt for OpenAI GPT-3 using the provided information
       const prompt = `
+      write a personalized SOP using this questions and answers.
         Full Name: ${fullName}
         Age: ${age}
         Highest Level of Education: ${educationLevel}
@@ -193,12 +204,13 @@ async function run() {
       // Make an API call to OpenAI GPT-3
       const response = await openai.chat.completions.create({
         model: "gpt-3.5-turbo",
-        prompt,
+        messages: [{ role: "user", content: prompt }],
         temperature: 0.7,
         max_tokens: 500,
       });
+      //   console.log(response.choices[0].message.content);
 
-      return response.choices[0].text.trim();
+      return response.choices[0].message.content;
     }
   } finally {
     // Ensures that the client will close when you finish/error
