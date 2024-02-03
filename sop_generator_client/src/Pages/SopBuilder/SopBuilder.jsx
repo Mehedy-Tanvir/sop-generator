@@ -3,6 +3,10 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 const SopBuilder = () => {
+  //   const all = import.meta.env;
+
+  //   const serverLink = all.VITE_SERVER_LINK;
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   // State variables for form fields
   const [formData, setFormData] = useState({
@@ -40,7 +44,7 @@ const SopBuilder = () => {
     const toastId = toast.loading("Submitting form...");
 
     axios
-      .post("http://localhost:3000/sendSOP", formData)
+      .post("https://sop-generator-ai-server.onrender.com/sendSOP", formData)
       .then((res) => {
         toast.success("SOP was sent to your email!", { id: toastId });
         console.log(res.data);

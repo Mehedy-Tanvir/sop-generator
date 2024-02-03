@@ -3,17 +3,22 @@ const app = express();
 const cors = require("cors");
 require("dotenv").config();
 const { OpenAI } = require("openai");
-// const openai = new OpenAI();
-const openai = new OpenAI({
-  apiKey: process.env.OPEN_AI_KEY,
-});
 const nodemailer = require("nodemailer");
-
 const port = process.env.PORT || 3000;
 
 // middlewares
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: ["https://sop-generator-ai.netlify.app"],
+    credentials: true,
+  })
+);
+
+// const openai = new OpenAI();
+const openai = new OpenAI({
+  apiKey: process.env.OPEN_AI_KEY,
+});
 
 // node mailer
 
@@ -30,7 +35,7 @@ const transporter = nodemailer.createTransport({
 });
 
 app.get("/", (req, res) => {
-  res.send("Hello world");
+  res.send("WELCOME TO SOP GENERATOR SERVER");
 });
 async function run() {
   // Send a ping to confirm a successful connection
