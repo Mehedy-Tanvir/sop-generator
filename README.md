@@ -14,7 +14,7 @@ To run the app locally, follow these steps:
    - `NODE_MAILER_USER=[User Gmail Account]`
    - `NODE_MAILER_APP_PASSWORD=[App Password]`
 3. Run `npm i` inside the `sop_generator_server` directory.
-4. Start the server with `nodemon index.js`.
+4. Start the server with `nodemon index.js`. If you don't have installed `nodemon` you can run `npm install -g nodemon` to install it globally.
 5. Open another CLI, navigate to the `sop_generator_client` directory, and run `npm i` to install.
 6. Now run `code .` command to open the code in Visual Studio Code, and replace the api domain with `http://localhost:3000` to run app in local machine.
 7. Then Start the client server with `npm run dev` command.
